@@ -48,10 +48,10 @@ namespace TwoFactorAuth
             }
 
             Random random = new Random();
-            int expectedCode = random.Next(10000, 100000);
-            MessageBox.Show(expectedCode.ToString(), "Код");
+            int entryCode = random.Next(10000, 100000);
+            MessageBox.Show(entryCode.ToString(), "Код");
 
-            AuthCode = new Authorization(expectedCode);
+            AuthCode = new Authorization(entryCode);
 
             if ((bool)AuthCode.ShowDialog())
             {
@@ -64,7 +64,7 @@ namespace TwoFactorAuth
             else
             {
                 Timer.Start();
-                time = 60;
+                time = 10;
                 Time.Text = "Получить новый код можно будет через " + time + " с";
                 Auth.IsEnabled = false;
                 LogIn.IsEnabled = false;
@@ -181,7 +181,7 @@ namespace TwoFactorAuth
             {
                 if (Captha.Text.ToLower() == CAPTCHA.ToLower())
                 {
-                    MessageBox.Show("Успешно");
+                    MessageBox.Show("Успешно!");
                     Auth.IsEnabled = true;
                     LogIn.IsEnabled = true;
                     PasswordIn.IsEnabled = true;
